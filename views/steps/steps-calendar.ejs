@@ -1,0 +1,39 @@
+<%- include ('../system/header') %>
+
+<h1>Naptár</h1>
+<% if (error) { session.error = error; session.severity = severity; } %>
+<%- include ('../system/message') %>
+
+<div class="d-flex justify-content-between align-items-center my-3">
+  <a href="/steps/new" class="btn btn-sm btn-outline-secondary">Új napi lépésszám</a>
+  <a href="/steps" class="btn btn-sm btn-outline-primary">Vissza a listához</a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div id="calendar"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      firstDay: 1,
+      height: 'auto',
+      events: <%- JSON.stringify(events || []) %>,
+      eventClick: function(info) {
+        if (info.event.url) {
+          info.jsEvent.preventDefault();
+          window.location.href = info.event.url;
+        }
+      }
+    });
+
+    calendar.render();
+  });
+</script>
+
+<%- include ('../system/footer') %>

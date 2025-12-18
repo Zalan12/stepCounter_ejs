@@ -1,0 +1,47 @@
+body{
+    background-color: silver;
+}
+header{
+    background-color: slategray;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border: 5px solid white;
+}
+main{
+    background-color: white;
+    margin: 10px;
+}
+footer{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 80%;
+}
+.container{
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px black;
+}   
+
+.text-justify{
+    text-align: justify;
+}
+em{
+    color: red;
+    font-weight: bold;
+}
+#chart{
+    max-height: 400px;
+    max-width: 400px;
+}
+.card h1{
+    color: darkblue;
+}
+/* StepCounter rebrand tweaks */
+header{padding:18px 0;margin-bottom:10px;border-bottom:1px solid rgba(0,0,0,.08);} 
+header h1{letter-spacing:.5px;font-weight:700;}
+.navbar{border-radius:14px;}
+.container{max-width:980px;}

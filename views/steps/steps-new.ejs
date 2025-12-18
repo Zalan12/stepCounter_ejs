@@ -1,0 +1,22 @@
+
+<%- include ('../system/header') %>
+
+<h1>Új napi lépésszám</h1>
+<%- include ('../system/message') %>
+
+<form method="POST" action="/steps/new" class="mt-3">
+  <div class="mb-3">
+    <label class="form-label">Dátum (YYYY-MM-DD)</label>
+    <input class="form-control" name="date" placeholder="2025-12-17" value="<%= body.date || '' %>">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Lépésszám</label>
+    <input class="form-control" name="steps" type="number" min="1" value="<%= body.steps || '' %>">
+  </div>
+
+  <button class="btn btn-primary" type="submit">Mentés</button>
+  <a class="btn btn-outline-secondary" href="/steps">Mégse</a>
+</form>
+
+<%- include ('../system/footer') %>

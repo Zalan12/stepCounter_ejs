@@ -1,0 +1,25 @@
+<%- include('../system/header') %>
+
+    <div class="col-lg-6 offset-lg-3">
+
+        <%- include('../system/message') %>
+        <h1>Belépés</h1>
+
+        <form action="/users/login" method="post">
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="" name="email" value="<%= session.body ? session.body.email : '' %>">
+                <label for="email">Email cím</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" placeholder="" name="password" value="<%= session.body ? session.body.password : '' %>">
+                <label for="password">Jelszó</label>
+            </div>
+
+            <input type="submit" value="Belépés" name="login" class="btn btn-outline-primary mt-3">
+
+
+        </form>
+
+    </div>
+    <%- include('../system/footer') %>

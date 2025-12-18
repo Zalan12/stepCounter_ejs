@@ -1,0 +1,22 @@
+
+<%- include ('../system/header') %>
+
+<h1>Napi lépésszám szerkesztése</h1>
+<%- include ('../system/message') %>
+
+<form method="POST" action="/steps/edit/<%= item.id %>" class="mt-3">
+  <div class="mb-3">
+    <label class="form-label">Dátum (YYYY-MM-DD)</label>
+    <input class="form-control" name="date" value="<%= item.date %>">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Lépésszám</label>
+    <input class="form-control" name="steps" type="number" min="1" value="<%= item.steps %>">
+  </div>
+
+  <button class="btn btn-primary" type="submit">Frissítés</button>
+  <a class="btn btn-outline-secondary" href="/steps">Mégse</a>
+</form>
+
+<%- include ('../system/footer') %>

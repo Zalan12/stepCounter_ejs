@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('../system/header.ejs') %>
+    <title>StepCounter 2025 – Profil</title>
+</head>
+<body>
+    <%- include('../system/navbar.ejs', { session: session }) %>
+
+    <div class="container mt-4">
+        <h1 class="mb-3">Profil</h1>
+
+        <% if (error) { %>
+            <div class="alert alert-<%= severity || 'info' %>"><%= error %></div>
+        <% } %>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Alapadatok</h5>
+                        <form method="post" action="/profile/update">
+                            <div class="mb-3">
+                                <label class="form-label">Név</label>
+                                <input class="form-control" name="name" value="<%= user.name %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" value="<%= user.email %>" required>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary" type="submit">Mentés</button>
+                                <a class="btn btn-outline-secondary" href="/steps">Vissza</a>
+                            </div>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <div class="small text-muted">
+                            Regisztráció dátuma: <%= user.createdAt ? new Date(user.createdAt).toLocaleString('hu-HU') : '-' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Jelszó módosítás</h5>
+                        <form method="post" action="/profile/password">
+                            <div class="mb-3">
+                                <label class="form-label">Régi jelszó</label>
+                                <input type="password" class="form-control" name="oldPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Új jelszó</label>
+                                <input type="password" class="form-control" name="newPassword" required>
+                                <div class="form-text">Min. 8 karakter, 1 kisbetű, 1 nagybetű, 1 szám.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Új jelszó újra</label>
+                                <input type="password" class="form-control" name="newPassword2" required>
+                            </div>
+                            <button class="btn btn-warning" type="submit">Jelszó mentése</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../system/footer.ejs') %>
+</body>
+</html>

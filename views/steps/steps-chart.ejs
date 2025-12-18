@@ -1,0 +1,53 @@
+<%- include ('../system/header') %>
+
+<h1>Statisztika</h1>
+<% if (error) { session.error = error; session.severity = severity; } %>
+<%- include ('../system/message') %>
+
+<div class="d-flex flex-wrap gap-2 justify-content-between align-items-center my-3">
+  <div class="text-muted"><%= title || '' %></div>
+
+  <form method="get" action="/steps/chart" class="d-flex align-items-center gap-2">
+    <label class="form-label mb-0 small">Időszak</label>
+    <select name="range" class="form-select form-select-sm" onchange="this.form.submit()">
+      <option value="7d" <%= range === '7d' ? 'selected' : '' %>>Utolsó 7 nap</option>
+      <option value="month" <%= range === 'month' ? 'selected' : '' %>>Aktuális hónap</option>
+      <option value="year" <%= range === 'year' ? 'selected' : '' %>>Aktuális év</option>
+    </select>
+  </form>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <canvas id="stepsChart" height="120"></canvas>
+  </div>
+</div>
+
+<div class="d-flex gap-2 my-3">
+  <a href="/steps" class="btn btn-sm btn-outline-primary">Vissza a listához</a>
+  <a href="/steps/new" class="btn btn-sm btn-outline-secondary">Új napi lépésszám</a>
+</div>
+
+<script>
+  const labels = <%- JSON.stringify(labels || []) %>;
+  const values = <%- JSON.stringify(values || []) %>;
+
+  new Chart(document.getElementById('stepsChart'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Lépések',
+        data: values,
+        tension: 0.25
+      }]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+</script>
+
+<%- include ('../system/footer') %>
